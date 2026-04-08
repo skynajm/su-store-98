@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SU.STORE.98</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Didact+Gothic&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream:  #faf6f1;
+  --blush:  #f4dde5;
+  --pink:   #e8b8c8;
+  --rose:   #c98aa0;
+  --gold:   #c9a86c;
+  --text:   #3a2830;
+  --muted:  #9a7080;
+  --light:  #c4a0b0;
+  --shadow: rgba(180,120,140,0.14);
+  --glow:   rgba(232,184,200,0.45);
+}
+
+html, body {
+  min-height: 100vh;
+  font-family: 'Didact Gothic', sans-serif;
+  background: linear-gradient(145deg, #fdf8f2 0%, #faedf3 40%, #f5e8ee 70%, #faf2ec 100%);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.blob {
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 0;
+}
+.blob-1 {
+  width: 480px; height: 480px;
+  top: -140px; right: -140px;
+  background: radial-gradient(circle, rgba(232,184,200,.20) 0%, transparent 70%);
+}
+.blob-2 {
+  width: 360px; height: 360px;
+  bottom: -100px; left: -100px;
+  background: radial-gradient(circle, rgba(201,168,108,.14) 0%, transparent 70%);
+}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  position: fixed; top: 18px; right: 20px;
+  z-index: 200;
+  display: flex;
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(12px);
+  border-radius: 40px; padding: 4px;
+  border: 1px solid rgba(232,184,200,.35);
+  box-shadow: 0 4px 18px var(--shadow);
+}
+.lang-btn {
+  padding: 6px 18px; border: none;
+  border-radius: 30px;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; cursor: pointer;
+  background: transparent; color: var(--muted);
+  transition: all .3s ease;
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, var(--rose), var(--pink));
+  color: #fff;
+  box-shadow: 0 2px 12px var(--glow);
+}
+
+/* ── PAGE ── */
+.page {
+  position: relative; z-index: 1;
+  max-width: 840px; margin: 0 auto;
+  padding: 0 24px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 64px 0 10px;
+  display: flex; flex-direction: column; align-items: center;
+  animation: fadeUp .9s ease both;
+  width: 100%; text-align: center;
+}
+
+.logo-ring {
+  width: 152px; height: 152px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.65);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(232,184,200,.4);
+  box-shadow: 0 8px 40px var(--shadow), inset 0 0 24px rgba(255,255,255,.5);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 26px; overflow: hidden;
+}
+.logo-ring img {
+  width: 120px; height: 120px; object-fit: contain;
+}
+.logo-fallback {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px; font-weight: 400;
+  color: var(--rose); line-height: 1;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5.5vw, 40px);
+  font-weight: 400;
+  color: var(--text);
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: "lnum" on;
+}
+
+.gold-line {
+  width: 72px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 16px;
+}
+
+.tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(14px, 2.8vw, 18px);
+  font-weight: 400;
+  color: var(--light);
+  letter-spacing: .05em;
+}
+
+/* ── SEPARATOR ── */
+.sep {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; max-width: 400px;
+  margin: 36px 0 32px; opacity: .45;
+}
+.sep::before, .sep::after {
+  content: ''; flex: 1; height: 1px;
+}
+.sep::before { background: linear-gradient(90deg, transparent, var(--pink)); }
+.sep::after  { background: linear-gradient(90deg, var(--pink), transparent); }
+.sep-icon { font-size: 18px; }
+
+/* ── BUTTONS ── */
+.buttons {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px; margin-bottom: 54px;
+  animation: fadeUp .9s .2s ease both;
+  width: 100%;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 280px;
+  height: 52px;
+  padding: 0;
+  border-radius: 60px;
+  text-decoration: none;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: transform .3s ease, box-shadow .3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn:hover { transform: scale(1.03); }
+
+.btn-wa {
+  background: linear-gradient(135deg, #f7dfe7, #eddbd5);
+  color: var(--text);
+  border: 1.5px solid rgba(232,184,200,.5);
+  box-shadow: 0 6px 26px rgba(180,120,140,.16);
+}
+.btn-wa:hover { box-shadow: 0 10px 32px rgba(180,120,140,.30), 0 0 0 4px rgba(232,184,200,.15); }
+
+.btn-ig {
+  background: linear-gradient(135deg, #fdeef5, #f9e4ec);
+  color: var(--text);
+  border: 1.5px solid rgba(201,138,160,.3);
+  box-shadow: 0 6px 26px rgba(180,110,140,.13);
+}
+.btn-ig:hover { box-shadow: 0 10px 32px rgba(180,100,140,.28), 0 0 0 4px rgba(201,138,160,.12); }
+
+.btn-tt {
+  background: linear-gradient(135deg, #f7ede0, #f2e8d8);
+  color: var(--text);
+  border: 1.5px solid rgba(201,168,108,.38);
+  box-shadow: 0 6px 26px rgba(180,140,80,.13);
+}
+.btn-tt:hover { box-shadow: 0 10px 32px rgba(180,140,80,.26), 0 0 0 4px rgba(201,168,108,.14); }
+
+.btn-icon { font-size: 17px; line-height: 1; flex-shrink: 0; }
+
+/* ── GALLERY ── */
+/*.gallery {
+  width: 100%; margin-bottom: 56px;
+  animation: fadeUp .9s .38s ease both;
+}
+.gallery-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 400;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); text-align: center;
+  margin-bottom: 24px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.gallery-img {
+  border-radius: 18px; overflow: hidden;
+  aspect-ratio: 3/4;
+  box-shadow: 0 6px 28px var(--shadow);
+  transition: transform .35s ease, box-shadow .35s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 44px rgba(180,120,145,.22);
+}
+.gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-img:nth-child(1) { background: linear-gradient(160deg,#fdf4f7,#f8e8ed); }
+.gallery-img:nth-child(2) { background: linear-gradient(160deg,#fdf8f0,#f5eddf); }
+.gallery-img:nth-child(3) { background: linear-gradient(160deg,#f8f0fc,#eeddf5); }
+.gallery-img:nth-child(4) { background: linear-gradient(160deg,#f0f8f4,#ddf0e9); }
+.gallery-img .ph { font-size: 40px; opacity: .4; user-select: none; }*/
+
+/* ── INFO ── */
+.info {
+  display: flex; justify-content: center;
+  flex-wrap: wrap; gap: 28px;
+  margin-bottom: 48px;
+  animation: fadeUp .9s .5s ease both;
+}
+.info-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; letter-spacing: .08em;
+  color: var(--muted); text-transform: uppercase;
+}
+
+/* ── FOOTER ── */
+footer {
+  width: 100%; padding: 24px 0 52px;
+  text-align: center;
+  border-top: 1px solid rgba(232,184,200,.22);
+  animation: fadeUp .9s .6s ease both;
+}
+.footer-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 15px;
+  font-weight: 400; color: var(--light);
+  letter-spacing: .08em;
+}
+
+/* ── RTL ── */
+html[dir="rtl"] .page        { text-align: right; }
+html[dir="rtl"] header       { text-align: center; }
+html[dir="rtl"] .info        { direction: rtl; }
+html[dir="rtl"] .gallery-heading { letter-spacing: .04em; }
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .btn { width: 260px; height: 50px; font-size: 12px; }
+  .logo-ring { width: 128px; height: 128px; }
+  .logo-ring img { width: 100px; height: 100px; }
+  .logo-fallback { font-size: 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn"        id="btn-ar" onclick="setLang('ar')">AR</button>
+</div>
+
+<div class="page">
+
+  <header>
+    <div class="logo-ring">
+     
+        <img src="D:\soso\su\log.png" alt="SU.STORE.98">
+      
+    </div>
+    <span class="brand-name">SU.STORE.98</span>
+    <div class="gold-line"></div>
+    <p class="tagline"
+       data-en="Where light, scent, and beauty meet"
+       data-ar="حيث يلتقي الضوء والعطر والجمال">
+      Where light, scent, and beauty meet
+    </p>
+  </header>
+
+  <div class="sep"><span class="sep-icon">🕯️</span></div>
+
+  <div class="buttons">
+    <a href="https://wa.me/964XXXXXXXXXX" class="btn btn-wa" target="_blank" rel="noopener">
+      <span class="btn-icon">🕯️</span>
+      <span data-en="Order via WhatsApp" data-ar="اطلب عبر واتساب">Order via WhatsApp</span>
+    </a>
+    <a href="https://instagram.com/su.store.98" class="btn btn-ig" target="_blank" rel="noopener">
+      <span class="btn-icon">🤍</span>
+      <span data-en="Follow us on Instagram" data-ar="تابعنا على إنستغرام">Follow us on Instagram</span>
+    </a>
+    <a href="https://www.tiktok.com/@su.store.98?_r=1&_t=ZS-95NOBhQLcTU" class="btn btn-tt" target="_blank" rel="noopener">
+      <span class="btn-icon">✨</span>
+      <span data-en="Explore on TikTok" data-ar="استكشف منتجاتنا على تيك توك">Explore on TikTok</span>
+    </a>
+  </div>
+
+  <!--<section class="gallery">
+    <p class="gallery-heading"
+       data-en="Our Collection"
+       data-ar="مجموعتنا">Our Collection</p>
+    <div class="gallery-grid">
+      
+        Replace each <span class="ph"> with <img src="photo.jpg" alt="…">
+        once you have your product photos.
+      
+      <div class="gallery-img"><span class="ph">🕯️</span></div>
+      <div class="gallery-img"><span class="ph">🎁</span></div>
+      <div class="gallery-img"><span class="ph">💎</span></div>
+      <div class="gallery-img"><span class="ph">🪨</span></div>
+    </div>
+  </section>-->
+
+  <div class="info">
+    <div class="info-item">
+      <span>📍</span>
+      <span data-en="Baghdad, Iraq" data-ar="بغداد، العراق">Baghdad, Iraq</span>
+    </div>
+    <div class="info-item">
+      <span>@</span>
+      <span>su.store.98</span>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-text"
+       data-en="Thank you for choosing SU.STORE.98 🤍"
+       data-ar="شكراً لاختيارك SU.STORE.98 🤍">
+      Thank you for choosing SU.STORE.98 🤍
+    </p>
+  </footer>
+
+</div>
+
+<script>
+function setLang(lang) {
+  const html = document.documentElement;
+  html.lang = lang;
+  html.dir  = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+  });
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+}
+</script>
+</body>
+</html>
